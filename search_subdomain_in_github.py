@@ -16,13 +16,17 @@ import sys
 	# tried use 6 tokens but it is 30 request per account
 #2 extract github search links in arranged
 
+#3 using this techniche to minimize time and the number of requests
+# "akoam.com" OR "akoam" OR "akoam.com" OR "akoam.com" OR "tesla.com" OR "asd.akoam.com" 
 
-tokens = ["a9648f67b142c5d54e1c31960ceb7aeeb881e83a","95ef64fb503a966e6f987abe581872259dd11218"]
+tokens = ["a9648f67b142c5d54e1c31960ceb7aeeb881e83a","d1168beffd42126728bfab609c605a92e30f4a8b"]
 current= -1
+
+
 
 def get_arranged_one_token(tokens):
 	global current
-	if current ==1:
+	if current ==int(len(tokens) - 1):
 		current=-1
 	current = current+1
 	return tokens[current]
@@ -33,6 +37,16 @@ def padding(padding_space,before,value):
 # line="\"wiki.admin.trello.com\"" # 2 results
 #line="\"akoam.com\" \"sarhan2/xyz7/234.m3u8\""
 
+
+
+'''
+query_string=[]
+query_count=1
+def build_query(subdomain)
+	global line
+	if query_count ==4
+		return
+'''
 
 x=1;
 counter = 0
@@ -48,7 +62,7 @@ for line in sys.stdin:
 	auth_header={"Authorization":"token "+y}
 	# print y
 	
-	if counter % 52 == 0:
+	if counter % int(len(tokens)*25) == 0:
 		print 'will sleep: '+str( (time_start_point+60) -time.time() )
 		time.sleep( abs((time_start_point+60) -time.time()) )  #abs not best solution :)
 		time_start_point=time.time() #reset the timer
