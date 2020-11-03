@@ -17,7 +17,7 @@ import sys
 #2 extract github search links in arranged
 
 
-tokens = ["a9648f67b142c5d54e1c31960ceb7aeeb881e83a","fadf1923fe98900d5ddf9f2884d97430b64fc720"]
+tokens = ["a9648f67b142c5d54e1c31960ceb7aeeb881e83a","95ef64fb503a966e6f987abe581872259dd11218"]
 current= -1
 
 def get_arranged_one_token(tokens):
