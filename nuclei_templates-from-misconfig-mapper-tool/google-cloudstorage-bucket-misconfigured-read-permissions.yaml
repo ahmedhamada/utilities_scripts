@@ -1,0 +1,37 @@
+id: google-cloudstorage-bucket-misconfigured-read-permissions
+info:
+  author: Generated
+  description: GCP Storage Bucket can be left misconfigured and allow anyone to access
+    files and objects potentially containing sensitive data if access permissions
+    aren't properly enforced
+  name: Google CloudStorage Bucket Misconfigured Read Permissions
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/google-cloud-storage-bucket/google-cloud-storage-bucket
+  - https://cloud.google.com/storage/docs/access-control/making-data-public#buckets
+  - https://cloud.google.com/storage/docs/public-access-prevention
+  severity: medium
+  tags: misconfig-mapper-template,google
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - <ListBucketResult
+    - <Code>AccessDenied</Code>
+    - <Message>Access denied.</Message>
+    - <Details>Anonymous caller does not have storage.objects.list access to the Google
+      Cloud Storage bucket. Permission 'storage.objects.list' denied on resource (or
+      it may not exist).</Details>
+  - type: word
+    words:
+    - <ListBucketResult
+    - <Code>AccessDenied</Code>
+    - <Message>Access denied.</Message>
+    - <Details>Anonymous caller does not have storage.objects.list access to the Google
+      Cloud Storage bucket. Permission 'storage.objects.list' denied on resource (or
+      it may not exist).</Details>
+  method: GET
+  path:
+  - https://{TARGET}.storage.googleapis.com/

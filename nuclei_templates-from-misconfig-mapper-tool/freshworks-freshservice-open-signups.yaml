@@ -1,0 +1,27 @@
+id: freshworks-freshservice-open-signups
+info:
+  author: Generated
+  description: Freshworks Freshservice Open Signups
+  name: Freshworks Freshservice Open Signups
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/freshworks-freshservice/open-user-registration
+  - https://infosecwriteups.com/hundreds-of-companies-internal-data-exposed-part-2-the-freshservice-misconfiguration-a9432c0b5dc8
+  - https://partnersupport.freshworks.com/en/support/solutions/articles/225287-how-can-i-disable-the-option-for-requesters-to-sign-up-to-our-helpdesk-
+  severity: medium
+  tags: misconfig-mapper-template,freshworks
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - <h2>Browse help articles</h2>
+    - (<h2>)?Announcements</(h2|h3)>
+    - var TICKET_SITE_KEY
+  - type: word
+    words:
+    - <title>Signup for a new account
+  method: GET
+  path:
+  - https://{TARGET}.freshservice.com/support/signup

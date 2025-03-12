@@ -1,0 +1,31 @@
+id: aws-s3-bucket-with-misconfigured-list-permissions
+info:
+  author: Generated
+  description: AWS S3 Bucket can be left misconfigured and allow anyone to list files
+    and objects potentially containing sensitive data if access permissions aren't
+    properly enforced
+  name: AWS S3 Bucket with Misconfigured List Permissions
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/aws-s3/misconfigured-list-permissions
+  - https://blog.intigriti.com/hacking-tools/hacking-misconfigured-aws-s3-buckets-a-complete-guide
+  severity: medium
+  tags: misconfig-mapper-template,aws-s3
+requests:
+- matchers:
+  - status:
+    - 200
+    - 403
+    type: status
+  - type: word
+    words:
+    - <ListBucketResult
+    - <Code>AccessDenied</Code>
+    - <Message>Access denied.</Message>
+    - x-amz-bucket-region
+  - type: word
+    words:
+    - <ListBucketResult
+    - <Name>
+  method: GET
+  path:
+  - https://{TARGET}.s3.amazonaws.com/

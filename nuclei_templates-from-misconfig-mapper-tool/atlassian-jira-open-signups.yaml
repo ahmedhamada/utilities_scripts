@@ -1,0 +1,24 @@
+id: atlassian-jira-open-signups
+info:
+  author: Generated
+  description: Atlassian Jira Open Signups
+  name: Atlassian Jira Open Signups
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/atlassian-jira/open-user-registration
+  - https://confluence.atlassian.com/adminjiraserver072/enabling-public-signup-and-captcha-828787685.html
+  severity: medium
+  tags: misconfig-mapper-template,atlassian
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - 'atl-traceid:'
+  - type: word
+    words:
+    - Sign up for Jira
+  method: GET
+  path:
+  - https://{TARGET}.atlassian.net/secure/Signup!default.jspa

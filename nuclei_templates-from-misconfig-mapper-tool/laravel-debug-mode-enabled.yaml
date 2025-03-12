@@ -1,0 +1,25 @@
+id: laravel-debug-mode-enabled
+info:
+  author: Generated
+  description: Laravel can expose sensitive data when debug mode is left enabled.
+  name: Laravel Debug Mode Enabled
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/laravel/debug-mode-enabled
+  - https://laravel.com/docs/10.x/deployment#debug-mode
+  severity: medium
+  tags: misconfig-mapper-template,laravel
+requests:
+- matchers:
+  - status:
+    - 500
+    type: status
+  - type: word
+    words:
+    - 'Set-Cookie: XSRF-TOKEN=eyJpd'
+  - type: word
+    words:
+    - Illuminate\\Foundation\\Bootstrap\\HandleExceptions::handleError
+    - Illuminate\\Foundation\\Http\\Kernel
+  method: GET
+  path:
+  - https://{TARGET}/profiles

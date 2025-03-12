@@ -1,0 +1,24 @@
+id: azure-devops
+info:
+  author: Generated
+  description: Azure DevOps service
+  name: Azure DevOps
+  reference:
+  - https://github.com/synacktiv/nord-stream
+  - https://www.synacktiv.com/publications/cicd-secrets-extraction-tips-and-tricks
+  severity: medium
+  tags: misconfig-mapper-template,azuredevops
+requests:
+- matchers:
+  - status:
+    - 203
+    type: status
+  - type: word
+    words:
+    - Azure DevOps Services | Sign In
+  - type: word
+    words:
+    - Azure DevOps Services | Sign In
+  method: GET
+  path:
+  - https://dev.azure.com/{TARGET}/

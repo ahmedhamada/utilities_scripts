@@ -1,0 +1,36 @@
+id: graphql-introspection-query-enabled
+info:
+  author: Generated
+  description: The introspection query returns a GraphQL schema with all the information
+    about the GraphQL API, including what queries it supports like schemas, mutations,
+    fields, but also in some cases, private fields.
+  name: GraphQL Introspection Query Enabled
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/graphql/graphql-introspection-query-enabled
+  - https://graphql.org/learn/introspection/
+  - https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html#introspection-graphiql
+  - https://www.apollographql.com/blog/graphql/security/why-you-should-disable-graphql-introspection-in-production/
+  severity: medium
+  tags: misconfig-mapper-template,graphql
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - '"__schema"'
+    - '"name":(.*)?"__Directive"'
+    - The __Directive type represents a Directive that a server supports.
+  method: POST
+  path:
+  - https://{TARGET}/graphql
+  - https://{TARGET}/graphql/v1
+  - https://{TARGET}/graph
+  - https://{TARGET}/graphiql
+  - https://{TARGET}/api/graphql
+  - https://{TARGET}/v1/explorer
+  - https://{TARGET}/v1/graphiql
+  - https://{TARGET}/graphql/console
+  - https://{TARGET}/graphql.php
+  - https://{TARGET}/graphiql.php

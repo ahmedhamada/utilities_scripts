@@ -1,0 +1,31 @@
+id: jenkins-open-signups
+info:
+  author: Generated
+  description: In case signups are not turned off, any user can create an account
+    on the Jenkins instance and gain (privileged) access to (internal) developer resources.
+  name: Jenkins Open Signups
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/jenkins/open-signups
+  - https://rohit-soni.medium.com/chaining-multiple-vulnerabilities-leads-to-remote-code-execution-rce-on-paytm-e77f2fd2295e
+  severity: medium
+  tags: misconfig-mapper-template,jenkins
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - <title>Sign in \[Jenkins\]</title>
+    - <title>Signup not supported \[Jenkins\]</title>
+    - <title>Register \[Jenkins\]</title>
+  - type: word
+    words:
+    - <title>Sign up \[Jenkins\]</title>
+    - <title>Register \[Jenkins\]</title>
+    - <title>Create an account! \[Jenkins\]</title>
+    - If you already have a Jenkins account,
+  method: GET
+  path:
+  - https://jenkins.{TARGET}/signup
+  - https://jenkins.{TARGET}/jenkins/signup

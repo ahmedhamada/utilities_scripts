@@ -1,0 +1,40 @@
+id: salesforce-lightning-aura-component-enabled
+info:
+  author: Generated
+  description: Salesforce Lightning Aura Component is enabled and if access controls
+    are not properly enforced, it may introduce several security issues such as data
+    leaks and potential privilege escalations.
+  name: Salesforce Lightning Aura Component Enabled
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/salesforce/salesforce-lightning-aura-components-enabled
+  - https://www.enumerated.ie/index/salesforce
+  - https://www.enumerated.ie/index/salesforce-lightning-tinting-the-windows
+  - https://infosecwriteups.com/in-simple-words-pen-testing-salesforce-saas-application-part-1-the-essentials-ffae632a00e5
+  - https://infosecwriteups.com/in-simple-words-pen-testing-salesforce-saas-application-part-2-fuzz-exploit-eefae11ba5ae
+  - https://infosecwriteups.com/salesforce-bug-hunting-to-critical-bug-b5da44789d3
+  - https://www.biswajeetsamal.com/blog/salesforce-object-key-prefix-list/
+  - https://www.varonis.com/blog/abusing-salesforce-communities
+  - https://web.archive.org/web/20210116171949/https://mcafee.com/blogs/enterprise/cloud-security/17-must-enable-salesforce-security-capabilities-and-other-best-practices/
+  - https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/intro_lightning.htm
+  - https://help.salesforce.com/s/articleView?id=ind.media_asm_Disable_Lightning_Web_Security.htm&type=5
+  - https://trailhead.salesforce.com/content/learn/modules/data_security/data_security_records
+  severity: medium
+  tags: misconfig-mapper-template,salesforce
+requests:
+- matchers:
+  - status:
+    - 401
+    type: status
+  - type: word
+    words:
+    - markup://aura:invalidSession
+    - aura://String
+  - type: word
+    words:
+    - markup://aura:invalidSession
+    - aura://String
+  method: POST
+  path:
+  - https://{TARGET}.lightning.force.com/aura
+  - https://{TARGET}.lightning.force.com/sfsites/aura
+  - https://{TARGET}.lightning.force.com/s/sfsites/aura

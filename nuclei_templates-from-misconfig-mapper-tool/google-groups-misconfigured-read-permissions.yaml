@@ -1,0 +1,29 @@
+id: google-groups-misconfigured-read-permissions
+info:
+  author: Generated
+  description: Google Groups can be left misconfigured and leak sensitive company
+    data if access permissions aren't properly set
+  name: Google Groups Misconfigured Read Permissions
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/google-groups/google-groups
+  - https://workspaceupdates.googleblog.com/2018/06/configure-your-google-groups-settings.html
+  severity: medium
+  tags: misconfig-mapper-template,google
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - continue=https%3A%2F%2Fgroups.google.com
+    - <base href="https://groups.google.com/">
+    - <meta name="(application-name|apple-mobile-web-app-title)" content="Google Groups">
+    - <link rel="manifest" crossorigin="use-credentials" href="_/GroupsFrontendUi/manifest.json">
+  - type: word
+    words:
+    - </u>This is the group for <a href="
+    - '(aria-placeholder|value|aria-label)="Search conversations within '
+  method: GET
+  path:
+  - https://groups.google.com/g/{TARGET}

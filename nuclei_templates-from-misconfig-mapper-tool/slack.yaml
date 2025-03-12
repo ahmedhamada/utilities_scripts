@@ -1,0 +1,34 @@
+id: slack
+info:
+  author: Generated
+  description: Slack messaging service
+  name: Slack
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/slack/no-admin-approval-for-invitations
+  - https://slack.com/help/articles/115004854783-Require-admin-approval-for-workspace-invitations
+  - https://slack.com/help/articles/115004155306-Security-tips-to-protect-your-workspace
+  severity: medium
+  tags: misconfig-mapper-template,slack
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - src="https://a.slack-edge.com
+    - <title>Slack</title>
+    - aria-label="Slack homepage"
+  - type: word
+    words:
+    - src="https://a.slack-edge.com
+    - <title>Slack</title>
+    - aria-label="Slack homepage"
+  - type: negative-word
+    words:
+    - This workspace has been deleted
+    - This workspace has been suspended
+    - This workspace is no longer available
+  method: GET
+  path:
+  - https://{TARGET}.slack.com/

@@ -1,0 +1,29 @@
+id: atlassian-jira-service-desk
+info:
+  author: Generated
+  description: Atlassian Jira Service Desk Open Signups
+  name: Atlassian Jira Service Desk
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/atlassian-jira/atlassian-jira-service-desk-open-signups
+  - https://medium.com/@intideceukelaire/hundreds-of-internal-servicedesks-exposed-due-to-covid-19-ecd0baec87bd
+  - https://medium.com/@intideceukelaire/hundreds-of-internal-servicedesks-exposed-due-to-covid-19-ecd0baec87bdhttps://support.atlassian.com/jira-service-management-cloud/docs/customer-permissions-for-your-service-project-and-jira-site/
+  - https://support.atlassian.com/user-management/docs/control-how-users-get-access-to-products/
+  severity: medium
+  tags: misconfig-mapper-template,atlassian
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - 'atl-traceid:'
+    - '&quot;sdUserSignUpEnabled&quot;:true'
+    - Log in to Jira, Confluence, and all other Atlassian Cloud products here.
+  - type: word
+    words:
+    - '&quot;sdUserSignUpEnabled&quot;:true'
+    - Log in to Jira, Confluence, and all other Atlassian Cloud products here.
+  method: GET
+  path:
+  - https://{TARGET}.atlassian.net/servicedesk/customer/user/login

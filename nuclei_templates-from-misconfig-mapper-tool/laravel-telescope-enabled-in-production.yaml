@@ -1,0 +1,26 @@
+id: laravel-telescope-enabled-in-production
+info:
+  author: Generated
+  description: Telescope can help developers look at incoming HTTP requests, view
+    exceptions, logs, database queries and much more.
+  name: Laravel Telescope enabled in production
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/laravel/laravel-telescope-enabled-in-production
+  - https://laravel.com/docs/10.x/telescope
+  severity: medium
+  tags: misconfig-mapper-template,laravel
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - 'Set-Cookie: XSRF-TOKEN=eyJpd'
+  - type: word
+    words:
+    - <title>Requests - Telescope</title>
+    - Laravel Telescope
+  method: GET
+  path:
+  - https://{TARGET}/telescope/requests

@@ -1,0 +1,28 @@
+id: gitlab-private-source-code-snippets-exposed
+info:
+  author: Generated
+  description: Your GitLab instance may expose sensitive source code or private repositories
+    if read permissions on Project Snippets have been misconfigured.
+  name: Gitlab Private Source Code Snippets Exposed
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/gitlab/gitlab-private-source-code-snippets-exposed
+  - https://docs.gitlab.com/ee/user/snippets.html
+  severity: medium
+  tags: misconfig-mapper-template,gitlab
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - 'x-gitlab-meta:'
+  - type: word
+    words:
+    - "<title>Explore snippets \xB7 GitLab</title>"
+    - <meta content="GitLab" property="og:site_name">
+    - Discover projects, groups and snippets. Share your projects with others
+    - No snippets found
+  method: GET
+  path:
+  - https://gitlab.{TARGET}/explore/snippets

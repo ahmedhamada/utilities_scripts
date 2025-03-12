@@ -1,0 +1,28 @@
+id: atlassian-misconfigured-spaces
+info:
+  author: Generated
+  description: Atlassian Misconfigured Spaces
+  name: Atlassian Misconfigured Spaces
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/atlassian-confluence/misconfigured-spaces
+  - https://infosecwriteups.com/hundreds-of-companies-internal-data-exposed-the-confluence-cloud-misconfiguration-63cbc143caea
+  - https://confluence.atlassian.com/doc/assign-space-permissions-139460.html
+  - https://support.atlassian.com/confluence-cloud/docs/make-a-space-public/
+  severity: medium
+  tags: misconfig-mapper-template,atlassian
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - 'location: /wiki'
+    - <title>Log in with Atlassian account</title>
+  - type: word
+    words:
+    - <meta id="confluence-context-path" name="confluence-context-path" content="/wiki">
+    - <meta id="confluence-base-url" name="confluence-base-url" content="https://[^\.]+.atlassian.net/wiki">
+  method: GET
+  path:
+  - https://{TARGET}.atlassian.net/wiki/spaces

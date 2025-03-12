@@ -1,0 +1,31 @@
+id: cloudflare-r2-with-r2-dev-enabled
+info:
+  author: Generated
+  description: Cloudflare R2 with R2.DEV enabled can allow bad actors to view objects
+    in buckets
+  name: Cloudflare R2 with R2.DEV Enabled
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/cloudflare-r2/r2-dev-enabled
+  - https://blog.intigriti.com/hacking-tools/hacking-misconfigured-cloudflare-r2-buckets-a-complete-guide
+  severity: medium
+  tags: misconfig-mapper-template,cf-r2
+requests:
+- matchers:
+  - status:
+    - 200
+    - 401
+    - 404
+    type: status
+  - type: word
+    words:
+    - <p id="error-title">You are not authorized to view this bucket</p>
+    - <p id="footer-title">Is this your bucket?</p>
+    - href="https\://developers.cloudflare.com/r2/data-access/public-buckets/"
+  - type: word
+    words:
+    - <h3>Object not found<\/h3>
+    - <p id="footer-title">Is this your bucket\?<\/p>
+    - href="https\:\/\/developers.cloudflare.com\/r2\/data-access\/public-buckets\/"
+  method: GET
+  path:
+  - https://pub-{TARGET}.r2.dev/

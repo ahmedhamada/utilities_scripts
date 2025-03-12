@@ -1,0 +1,34 @@
+id: jenkins-public-groovy-script-console
+info:
+  author: Generated
+  description: Groovy Script Console provides developers a way to run Groovy Script
+    code right from their browser. However, in case permissions aren't configured
+    properly, it could introduce another attack vector and often lead to remote code
+    execution.
+  name: Jenkins Public Groovy Script Console
+  reference:
+  - https://bugology.intigriti.io/misconfig-mapper-docs/services/jenkins/public-groovy-script-console
+  - https://www.jenkins.io/doc/book/managing/script-console/
+  - https://www.jenkins.io/doc/book/security/access-control/permissions/
+  - https://rohit-soni.medium.com/chaining-multiple-vulnerabilities-leads-to-remote-code-execution-rce-on-paytm-e77f2fd2295e
+  severity: medium
+  tags: misconfig-mapper-template,jenkins
+requests:
+- matchers:
+  - status:
+    - 200
+    type: status
+  - type: word
+    words:
+    - Authentication required
+    - 'You are authenticated as:'
+    - 'Groups that you are in:'
+    - <title>Dashboard - Jenkins</title>
+  - type: word
+    words:
+    - Script Console
+    - Groovy Script
+  method: GET
+  path:
+  - https://jenkins.{TARGET}/script
+  - https://jenkins.{TARGET}/jenkins/script
